@@ -18,4 +18,14 @@
   "author": "Supplement Factory",
   "license": "MIT"
 }
+{
+  "name": "moxo-dash-enhanced",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  }
+}
 
