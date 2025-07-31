@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Project - Heal - Greens Blend | Supplement Factory</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/edit-form.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="index.html" class="back-link">← Back to Dashboard</a>
+                <img src="assets/supplement-factory-logo.png" alt="Supplement Factory" class="logo">
+                <div class="project-info">
+                    <h1>Edit Project</h1>
+                    <p class="project-subtitle">Update project details and settings</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <span class="status-badge" id="form-status">READY</span>
+                <div class="sync-indicator" id="sync-indicator">
+                    <span class="sync-dot"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="form-container">
+            <form id="project-edit-form" class="project-form">
+                <!-- Basic Information -->
+                <section class="form-section">
+                    <h2>Basic Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="project-name">Project Name</label>
+                            <input type="text" id="project-name" name="projectName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-description">Description</label>
+                            <textarea id="project-description" name="description" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-manager">Project Manager</label>
+                            <input type="text" id="project-manager" name="projectManager">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Project Status -->
+                <section class="form-section">
+                    <h2>Project Status</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" name="status" required>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Delayed">Delayed</option>
+                                <option value="On Hold">On Hold</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="automation-status">Automation Status</label>
+                            <select id="automation-status" name="automationStatus" required>
+                                <option value="Running">Running</option>
+                                <option value="Paused">Paused</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="current-stage">Current Stage</label>
+                            <select id="current-stage" name="currentStage" required>
+                                <option value="1">1. Book a kick-off call</option>
+                                <option value="2">2. Formulation brief awaiting approval</option>
+                                <option value="3">3. Brief approved</option>
+                                <option value="4">4. Market research</option>
+                                <option value="5">5. Ingredient selection</option>
+                                <option value="6">6. Ingredient specifications requested</option>
+                                <option value="7">7. Ingredient samples requested</option>
+                                <option value="8">8. Ingredient interaction testing</option>
+                                <option value="9">9. Organoleptic trials</option>
+                                <option value="10">10. Excipient research</option>
+                                <option value="11">11. Regulatory compliance research</option>
+                                <option value="12">12. Compiling mandatory label information</option>
+                                <option value="13">13. Nutritional table calculation</option>
+                                <option value="14">14. Researching compliant label claims</option>
+                                <option value="15">15. Compiling scientific studies and ingredient justifications</option>
+                                <option value="16">16. Deliver first draft</option>
+                                <option value="17">17. Revision one</option>
+                                <option value="18">18. Revision two</option>
+                                <option value="19">19. Draft approval</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="delay-notes">Delay Notes</label>
+                            <textarea id="delay-notes" name="delayNotes" rows="3" placeholder="Enter any delay reasons or project notes..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Timeline & Progress -->
+                <section class="form-section">
+                    <h2>Timeline & Progress</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="brief-approval-date">Brief Approval Date</label>
+                            <input type="date" id="brief-approval-date" name="briefApprovalDate">
+                            <small>This sets the official project start date (Stage 3 completion)</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="progress">Overall Progress (%)</label>
+                            <input type="number" id="progress" name="progress" min="0" max="100" step="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="time-efficiency">Time Efficiency (%)</label>
+                            <input type="number" id="time-efficiency" name="timeEfficiency" min="0" max="200" step="1">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Project Metrics -->
+                <section class="form-section">
+                    <h2>Project Metrics</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="tests-completed">Tests Completed</label>
+                            <input type="number" id="tests-completed" name="testsCompleted" min="0" placeholder="2">
+                        </div>
+                        <div class="form-group">
+                            <label for="total-tests">Total Tests Planned</label>
+                            <input type="number" id="total-tests" name="totalTests" min="1" placeholder="19">
+                        </div>
+                        <div class="form-group">
+                            <label for="quality-score">Quality Score (%)</label>
+                            <input type="number" id="quality-score" name="qualityScore" min="0" max="100" step="0.1" placeholder="85.0">
+                        </div>
+                        <div class="form-group">
+                            <label for="budget-used">Budget Used ($)</label>
+                            <input type="number" id="budget-used" name="budgetUsed" min="0" step="0.01" placeholder="1250">
+                        </div>
+                        <div class="form-group">
+                            <label for="budget-total">Total Budget ($)</label>
+                            <input type="number" id="budget-total" name="budgetTotal" min="0" step="0.01" placeholder="15000">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Form Actions -->
+                <section class="form-actions">
+                    <div class="action-buttons">
+                        <button type="button" id="reset-btn" class="btn btn-secondary">↺ Reset Form</button>
+                        <button type="button" id="preview-btn" class="btn btn-info">👁 Preview Changes</button>
+                        <button type="submit" id="save-btn" class="btn btn-primary">💾 Save Changes</button>
+                    </div>
+                    <div class="form-status">
+                        <div class="last-saved">
+                            Last saved: <span id="last-saved-time">Never</span>
+                        </div>
+                        <div class="auto-save-status">
+                            Auto-save: <span id="auto-save-status">Enabled</span>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>✅ Changes Saved Successfully</h3>
+                <button class="modal-close" id="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Your project changes have been saved and will be reflected in the dashboard.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modal-close-btn">Close</button>
+                <button class="btn btn-primary" id="view-dashboard-btn">View Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Supplement Factory. Advanced Project Management Platform.</p>
+            <div class="footer-info">
+                <span>Last Updated: <span id="footer-last-updated">7/24/2025, 2:15:00 PM</span></span>
+                <span>Data Source: Local Demo</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <!-- Enhanced backend scripts -->
+    <script src="js/api-client.js"></script>
+    <script src="js/mock-api.js"></script>
+    <script src="js/auth-manager.js"></script>
+    <script src="js/data-storage-enhanced.js"></script>
+    <!-- Original scripts (modified for compatibility) -->
+    <script src="js/form-validation.js"></script>
+    <script src="js/edit-form.js"></script>
+    
+    <script>
+        // Initialize edit form after authentication
+        window.addEventListener('load', async function() {
+            setTimeout(async () => {
+                try {
+                    // Check authentication first (company users only)
+                    if (!window.authManager.checkAuthStatus()) {
+                        return; // Auth modal will be shown
+                    }
+
+                    // Only company users can access edit page
+                    if (!window.apiClient.isCompanyUser()) {
+                        alert('Access denied. Only company users can edit projects.');
+                        window.location.href = '/';
+                        return;
+                    }
+
+                    // Initialize enhanced data storage
+                    if (window.dataStorageEnhanced) {
+                        await window.dataStorageEnhanced.initialize();
+                    }
+                    
+                    console.log('Edit form initialized successfully');
+                } catch (error) {
+                    console.error('Edit form initialization error:', error);
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,21 @@
+{
+  "name": "moxo-dash-enhanced",
+  "version": "1.0.0",
+  "description": "Enhanced supplement project management dashboard with backend storage",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step needed for static files'",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "keywords": ["supplement", "project-management", "dashboard"],
+  "author": "Supplement Factory",
+  "license": "MIT"
+}
+

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heal - Greens Blend | Project Dashboard - Supplement Factory</title>
+    <!-- Base stylesheet and fonts -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/index-tidy.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!--
+      Dynamically set the base path when the page is served from a nested route (e.g., /projects/slug).
+      This ensures that relative links for CSS, JS, and assets still resolve from the site root.
+    -->
+    <script>
+      (function() {
+        var path = window.location.pathname;
+        // When served from a nested route like "/projects/{slug}", prefix resources from root
+        // Do not apply this when loading from the local filesystem (starts with '/home' or similar)
+        if (path.startsWith('/projects/')) {
+          var base = document.createElement('base');
+          base.href = '/';
+          document.head.prepend(base);
+        }
+      })();
+    </script>
+</head>
+<body>
+    <!-- Loading Screen (unchanged) -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h2>Loading Project Dashboard</h2>
+            <p>Initializing supplement formulation tracking...</p>
+            <div class="loading-progress-container">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content" style="display: none;">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <img src="assets/supplement-factory-logo.png" alt="Supplement Factory" class="logo">
+                    <div class="header-info">
+                        <h1 id="project-name">Heal - Greens Blend</h1>
+                        <p class="header-url">connect.supplementfactoryuk.com/projects/heal-greens-blend</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="status-badge" id="project-status">IN PROGRESS</div>
+                    <button class="edit-btn" id="edit-project-btn">✏️ Edit Project</button>
+                    <div class="sync-indicator">
+                        <div class="sync-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            <!-- Timeline & Progress Row -->
+            <section class="dashboard-main">
+                <!-- Timeline Card -->
+                <div class="card timeline-card">
+                    <h2>Project Timeline</h2>
+                    <ul class="timeline-list">
+                        <li>
+                            <span class="timeline-label">Start Date</span>
+                            <span class="timeline-value" id="start-date">Awaiting brief approval</span>
+                        </li>
+                        <li>
+                            <span class="timeline-label">Estimated Completion</span>
+                            <span class="timeline-value" id="estimated-completion">TBD</span>
+                        </li>
+                        <li>
+                            <span class="timeline-label">Current Stage</span>
+                            <span class="timeline-value" id="current-stage">Formulation brief awaiting approval</span>
+                        </li>
+                        <li>
+                            <span class="timeline-label">Progress</span>
+                            <span class="timeline-value" id="progress-text">10%</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Progress Card -->
+                <div class="card progress-card">
+                    <h2>Overall Progress</h2>
+                    <div class="progress-container">
+                        <div class="progress-circle">
+                            <svg class="progress-ring" width="120" height="120">
+                                <!-- Base ring showing the full circle background -->
+                                <circle class="progress-ring-bg" cx="60" cy="60" r="54"></circle>
+                                <!-- Foreground ring showing progress; stroke-dashoffset updated via JS -->
+                                <circle class="progress-ring-circle" cx="60" cy="60" r="54"></circle>
+                            </svg>
+                            <div class="progress-text">
+                                <span class="progress-percentage" id="progress-percentage">10%</span>
+                                <span class="progress-label">COMPLETE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Information & Metrics -->
+            <section class="info-section">
+                <div class="info-grid">
+                    <!-- Project Information Card -->
+                    <div class="card info-card">
+                        <h2>Project Information</h2>
+                        <div class="info-item">
+                            <h4>Description</h4>
+                            <p id="project-description">Premium organic greens blend featuring spirulina, chlorella, wheatgrass, and barley grass. Formulated for maximum bioavailability and nutrient density with natural flavor enhancement. Target market: health-conscious consumers seeking convenient superfood nutrition.</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>Key Ingredients</h4>
+                            <p id="key-ingredients">Organic Spirulina (2000mg), Chlorella (1500mg), Wheatgrass (1000mg), Barley Grass (1000mg), Moringa Leaf (500mg), Natural Mint Flavor, Stevia Extract</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>Target Specifications</h4>
+                            <p id="target-specs">30-serving container, 8g serving size, pH 6.5-7.5, moisture content &lt;5%, particle size 80-120 mesh, green color index 85-95, 24-month shelf life</p>
+                        </div>
+                        <div class="info-meta">
+                            <div class="meta-item">
+                                <strong>Created:</strong> <span id="created-date">Tuesday, July 15, 2025</span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>Last Updated:</strong> <span id="last-updated">Thursday, July 24, 2025</span>
+                            </div>
+                            <div class="meta-item">
+                                <strong>Project Manager:</strong> <span id="project-manager">Dr. Sarah Chen, PhD - Senior Formulation Scientist</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Metrics Card -->
+                    <div class="card info-card">
+                        <h2>Project Metrics</h2>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-icon">🧪</div>
+                                <div class="metric-content">
+                                    <h4>Tests Completed</h4>
+                                    <div class="metric-value" id="tests-completed">2/19</div>
+                                    <div class="metric-status">In Progress</div>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-icon">📊</div>
+                                <div class="metric-content">
+                                    <h4>Quality Score</h4>
+                                    <div class="metric-value" id="quality-score">85.0%</div>
+                                    <div class="metric-status quality-below">Above Target (90%)</div>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-icon">⏱️</div>
+                                <div class="metric-content">
+                                    <h4>Time Efficiency</h4>
+                                    <div class="metric-value" id="time-efficiency">100%</div>
+                                    <div class="metric-status">On schedule</div>
+                                </div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-icon">💰</div>
+                                <div class="metric-content">
+                                    <h4>Budget Status</h4>
+                                    <div class="metric-value" id="budget-used">$1,250</div>
+                                    <div class="metric-status" id="budget-remaining">$13,750 remaining</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Development Roadmap -->
+            <section class="roadmap-section">
+                <div class="section-header">
+                    <h2>Development Roadmap</h2>
+                    <p class="section-description">Comprehensive supplement formulation process with 19 specialized stages</p>
+                </div>
+                <div class="roadmap-container" id="roadmap-container">
+                    <div class="roadmap-loading">
+                        <div class="loading-spinner-small"></div>
+                        <p>Loading development stages...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- Error Message -->
+    <div id="error-message" class="error-message" style="display: none;">
+        <div class="error-content">
+            <h2>⚠️ Failed to initialize dashboard</h2>
+            <p>There was an error loading the project data. Please refresh the page or check the browser console for details.</p>
+            <button onclick="location.reload()" class="retry-btn">Retry</button>
+            <button onclick="this.parentElement.parentElement.style.display='none'" class="close-btn">×</button>
+        </div>
+    </div>
+
+    <!-- JavaScript - reuse original scripts -->
+    <script>
+        window.addEventListener('error', function(e) {
+            console.error('Global error:', e.error);
+            const errorMsg = document.getElementById('error-message');
+            if (errorMsg) errorMsg.style.display = 'block';
+        });
+        
+        window.addEventListener('load', async function() {
+            setTimeout(async () => {
+                try {
+                    // Check authentication first
+                    if (!window.authManager.checkAuthStatus()) {
+                        return; // Auth modal will be shown
+                    }
+
+                    // Initialize enhanced data storage
+                    if (window.dataStorageEnhanced) {
+                        await window.dataStorageEnhanced.initialize();
+                        // Create compatibility layer
+                        window.dataStorage = {
+                            getData: () => window.dataStorageEnhanced.formatProjectForFrontend(window.dataStorageEnhanced.getData()),
+                            saveData: (data) => window.dataStorageEnhanced.saveData(data),
+                            getDefaultProjectData: () => window.dataStorageEnhanced.getDefaultProjectData()
+                        };
+                    }
+                    
+                    if (typeof ProjectRenderer !== 'undefined') {
+                        window.projectRenderer = new ProjectRenderer();
+                    }
+                    
+                    document.getElementById('loading-screen').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                } catch (error) {
+                    console.error('Initialization error:', error);
+                    document.getElementById('loading-screen').style.display = 'none';
+                    const errorMsg = document.getElementById('error-message');
+                    if (errorMsg) errorMsg.style.display = 'block';
+                }
+            }, 500);
+        });
+    </script>
+    <!-- Enhanced backend scripts -->
+    <script src="js/api-client.js"></script>
+    <script src="js/mock-api.js"></script>
+    <script src="js/auth-manager.js"></script>
+    <script src="js/data-storage-enhanced.js"></script>
+    <!-- Original scripts (modified for compatibility) -->
+    <script src="js/project-renderer.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

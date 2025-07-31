@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Dashboard | Supplement Factory</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard-backend.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <img src="assets/supplement-factory-logo.png" alt="Supplement Factory" class="logo">
+                <div class="project-info">
+                    <h1>Project Dashboard</h1>
+                    <p class="project-url">connect.supplementfactoryuk.com</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="create-btn" id="create-project-btn">+ New Project</button>
+                <div class="sync-indicator" id="sync-indicator">
+                    <span class="sync-dot"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Overview Section -->
+        <section class="overview-section">
+            <div class="overview-grid">
+                <div class="overview-card stats-card">
+                    <div class="card-header">
+                        <h3>Project Statistics</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-value" id="total-projects">3</div>
+                                <div class="stat-label">Total Projects</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="active-projects">2</div>
+                                <div class="stat-label">Active</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="completed-projects">1</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value" id="delayed-projects">0</div>
+                                <div class="stat-label">Delayed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-card progress-card">
+                    <div class="card-header">
+                        <h3>Overall Progress</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="progress-summary">
+                            <div class="progress-item">
+                                <span class="progress-label">Average Completion</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 67%"></div>
+                                </div>
+                                <span class="progress-value">67%</span>
+                            </div>
+                            <div class="progress-item">
+                                <span class="progress-label">On Schedule</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                                <span class="progress-value">85%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-card activity-card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list" id="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">📝</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Heal - Greens Blend updated</div>
+                                    <div class="activity-time">2 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">🚀</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Immune Support Complex started</div>
+                                    <div class="activity-time">1 day ago</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">✅</div>
+                                <div class="activity-content">
+                                    <div class="activity-title">Energy Boost Formula completed</div>
+                                    <div class="activity-time">3 days ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects-section">
+            <div class="section-header">
+                <h2>All Projects</h2>
+                <div class="section-controls">
+                    <div class="filter-controls">
+                        <select id="status-filter" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Delayed">Delayed</option>
+                            <option value="On Hold">On Hold</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                        <select id="sort-filter" class="filter-select">
+                            <option value="recent">Most Recent</option>
+                            <option value="name">Project Name</option>
+                            <option value="progress">Progress</option>
+                            <option value="status">Status</option>
+                        </select>
+                    </div>
+                    <div class="view-controls">
+                        <button class="view-btn active" data-view="cards">📋</button>
+                        <button class="view-btn" data-view="table">📊</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-container" id="projects-container">
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Projects will be dynamically populated -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Create Project Modal -->
+    <div class="modal" id="create-project-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Project</h3>
+                <button class="modal-close" id="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="create-project-form" class="create-form">
+                    <div class="form-group">
+                        <label for="new-project-name">Project Name</label>
+                        <input type="text" id="new-project-name" name="projectName" required placeholder="e.g., Premium Omega-3 Complex">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-project-description">Description</label>
+                        <textarea id="new-project-description" name="description" rows="3" placeholder="Brief description of the supplement formulation..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-project-manager">Project Manager</label>
+                        <select id="new-project-manager" name="projectManager" required>
+                            <option value="">Select Project Manager</option>
+                            <option value="Dr. Sarah Chen, PhD - Senior Formulation Scientist">Dr. Sarah Chen, PhD</option>
+                            <option value="Dr. Michael Rodriguez, PhD - Lead Researcher">Dr. Michael Rodriguez, PhD</option>
+                            <option value="Dr. Emily Watson, PhD - Regulatory Specialist">Dr. Emily Watson, PhD</option>
+                            <option value="Dr. James Thompson, PhD - Quality Director">Dr. James Thompson, PhD</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-brief-approval">Brief Approval Date (Optional)</label>
+                        <input type="date" id="new-brief-approval" name="briefApprovalDate">
+                        <small>Leave empty if brief is not yet approved</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-create">Cancel</button>
+                <button type="submit" form="create-project-form" class="btn btn-primary" id="create-project">Create Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Update Notifications -->
+    <div class="notification-container" id="notification-container"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-content">
+            <img src="assets/supplement-factory-logo.png" alt="Supplement Factory" class="loading-logo">
+            <h2>Welcome to Project Dashboard</h2>
+            <p>Loading your supplement formulation projects...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <!-- Enhanced backend scripts -->
+    <script src="js/api-client.js"></script>
+    <script src="js/mock-api.js"></script>
+    <script src="js/auth-manager.js"></script>
+    <script src="js/data-storage-enhanced.js"></script>
+    <!-- Original scripts (modified for compatibility) -->
+    <script src="js/project-card-renderer.js"></script>
+    <script src="js/backend-dashboard.js"></script>
+    
+    <script>
+        // Initialize dashboard after authentication
+        window.addEventListener('load', async function() {
+            setTimeout(async () => {
+                try {
+                    // Check authentication first
+                    if (!window.authManager.checkAuthStatus()) {
+                        return; // Auth modal will be shown
+                    }
+
+                    // Initialize enhanced data storage
+                    if (window.dataStorageEnhanced) {
+                        await window.dataStorageEnhanced.initialize();
+                    }
+                    
+                    // Hide loading screen
+                    const loadingScreen = document.getElementById('loading-screen');
+                    if (loadingScreen) {
+                        loadingScreen.style.display = 'none';
+                    }
+                    
+                    console.log('Dashboard initialized successfully');
+                } catch (error) {
+                    console.error('Dashboard initialization error:', error);
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+
